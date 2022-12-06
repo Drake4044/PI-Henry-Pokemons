@@ -19,15 +19,17 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-const { createDbPokemons } = require("./src/controllers")
-const syncOptions = { force: true, alter: true };
+const { createDbPokemons, createDbTypes } = require("./src/controllers")
+const syncOptions = { force: false, alter: true };
 
 // Syncing all the models at once.
 conn.sync(syncOptions).then(() => {
   server.listen(3001, async () => {
 
     if(syncOptions.force){
-      // await createDbPokemons()
+      await createDbTypes()
+      await createDbPokemons()
+      
     }
 
 
