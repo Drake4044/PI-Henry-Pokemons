@@ -7,10 +7,13 @@ const router = express.Router()
 router.get("/", async (req,res) => {
         const { name } = req.query
         if(name) {
-            const pokemons = await Pokemon.findAll({    
+            const pokemons = await Pokemon.findAll({ 
                 where: {
                     name: { [Op.iLike]: `%${name}%` }
                 },
+                order: [
+                    ["id", "ASC"]
+                ],
                 include: {
                     model: Types,
                     attributes: ["name"],
@@ -18,6 +21,7 @@ router.get("/", async (req,res) => {
                         attributes: []
                     },
                 },
+                
             })
             const pkFormat = getFormatPokemons(pokemons)
             pokemons.length 
@@ -25,6 +29,9 @@ router.get("/", async (req,res) => {
             : res.status(400).json(`${name} not found`)
         } else {
             const allpokemons = await Pokemon.findAll({
+                order: [
+                    ["id", "ASC"]
+                ],
                 include: {
                     model: Types,
                     attributes: ["name"],

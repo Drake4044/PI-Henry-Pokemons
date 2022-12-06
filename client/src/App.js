@@ -1,9 +1,15 @@
 import './App.css';
+import InitialPage from "./components/initialPage/initialPage.jsx";
+import { Route } from "react-router-dom";
+
 
 function App() {
   return (
     <div className="App">
-      <h1>Henry Pokemon</h1>
+      <Route exact path="/" component={InitialPage} />
+      <Route path="/pokemons" />
+      <Route path="/pokemons/:id" />
+      <Route path="/create" />
     </div>
   );
 }
