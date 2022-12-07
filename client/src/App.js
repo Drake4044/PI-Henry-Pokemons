@@ -1,8 +1,10 @@
 import './App.css';
+import { Route } from "react-router-dom";
 import InitialPage from "./components/initialPage/initialPage.jsx";
 import Home from './components/home/home';
-import { Route } from "react-router-dom";
 import DetailPokemon from './components/detailPokemon/detailPokemon';
+
+
 
 
 function App() {
