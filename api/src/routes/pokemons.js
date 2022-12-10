@@ -1,48 +1,40 @@
 const express = require("express")
 const { Pokemon, Types } = require("../db")
 const { Op } = require("sequelize");
-const { getFormatPokemons, getFormatPkmn, getPokemonsApi } = require("../controllers")
+const { getPokemonById, getAllPokemons, getPokemonbyName, getFormatPkmn } = require("../controllers")
 const router = express.Router()
 
 router.get("/", async (req,res) => {
         const { name } = req.query
         if(name) {
-            const pokemons = await Pokemon.findAll({ 
-                where: {
-                    name: { [Op.iLike]: `%${name}%` }
-                },
-                order: [
-                    ["id", "ASC"]
-                ],
-                include: {
-                    model: Types,
-                    attributes: ["name"],
-                    through : {
-                        attributes: []
-                    },
-                },
-                
-            })
-            const pkFormat = getFormatPokemons(pokemons)
-            pokemons.length 
-            ? res.json(pkFormat)
-            : res.status(400).json(`${name} not found`)
-        } else {
-            const allpokemons = await Pokemon.findAll({
-                order: [
-                    ["id", "ASC"]
-                ],
-                include: {
-                    model: Types,
-                    attributes: ["name"],
-                    through : {
-                        attributes: []
+            try {
+                const pokemons = await getPokemonbyName(name)
+                res.json(pokemons)
+            } catch (error) {
+                    const pkmndb = await Pokemon.findOne({ 
+                        where: {
+                            name: { [Op.like]: `%${name}%` }
+                        },
+                        include: {
+                            model: Types,
+                            attributes: ["name"],
+                            through : {
+                                attributes: []
+                            },
+                        },
+                    })
+                    if(pkmndb) {
+                        const pkmnFormat = getFormatPkmn(pkmndb)
+                        res.json(pkmnFormat)
+                    } else {
+                        res.status(400).json(`${name} not found`)
                     }
-                },
-            })
-            const pkFormat = getFormatPokemons(allpokemons)
+            }
+        } else {
+            const allpokemons = await getAllPokemons()
+            
             allpokemons.length 
-            ? res.json(pkFormat)
+            ? res.json(allpokemons)
             : res.res.status(404).json("Pokemons not found")
         }
 
@@ -51,28 +43,33 @@ router.get("/", async (req,res) => {
 
 router.get("/:id", async (req,res) => {
     const { id } = req.params
-    
-        const pkmmId = await Pokemon.findByPk(id, {
-            include: {
-                model: Types,
-                attributes: ["name"],
-                through : {
-                    attributes: []
-                }
-            },
-        })
-        
-        if(pkmmId){
-            pksFormat = getFormatPkmn(pkmmId) 
-            res.json(pksFormat)
-        } else {
+    try {
+        const pkmmId = await getPokemonById(id)
+        res.json(pkmmId)
+    } catch (error) {
+        try {
+            const pkmndb = await Pokemon.findOne({ 
+                where: {
+                    id: id 
+                },
+                include: {
+                    model: Types,
+                    attributes: ["name"],
+                    through : {
+                        attributes: []
+                    },
+                },
+            })
+            const pkmnFormat = getFormatPkmn(pkmndb)
+            res.json(pkmnFormat)
+        } catch (error) {
             res.status(400).json(`${id} not found`)
         }
+    }
 })
 
 router.post("/" , async (req,res) => {
     const {
-        id,
         name,
         image,
         hp,
@@ -84,10 +81,9 @@ router.post("/" , async (req,res) => {
         types
     } = req.body
 
-    console.log(req.body);
+// if(!name) res.status(400).json("Name is a obligaroty")
 
     const pokemonCreated = await Pokemon.create({
-        id,
         name,
         image,
         hp,

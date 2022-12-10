@@ -28,7 +28,7 @@ conn.sync(syncOptions).then(() => {
 
     if(syncOptions.force){
       await createDbTypes()
-      await createDbPokemons()
+      // await createDbPokemons()
       
     }
 
