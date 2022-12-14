@@ -15,16 +15,14 @@ const createDbTypes = async () => {
 
 
 const getPokemonsApi = async () => {
-    const fisrtCall = (await axios("https://pokeapi.co/api/v2/pokemon")).data
+    const fisrtCall = (await axios("https://pokeapi.co/api/v2/pokemon",{ "headers": "Deflate" })).data
     const secondCall = (await axios(fisrtCall.next)).data
     const pokemons = [...fisrtCall.results, ...secondCall.results]
-
-    
 
     const mapPokemons = await Promise.all(pokemons.map( async pokemon => {
         const pkmnInfo = (await axios(pokemon.url)).data
 
-        const pokemons =  {
+        return {
             id: pkmnInfo.id,
             name: pkmnInfo.name,
             image: pkmnInfo.sprites.other["official-artwork"].front_default,
@@ -34,10 +32,8 @@ const getPokemonsApi = async () => {
             speed: pkmnInfo.stats[5].base_stat,
             height: pkmnInfo.height,
             weight: pkmnInfo.weight,
-            types: pkmnInfo.types.map( t => t.type.name)
+            types: pkmnInfo.types.map( t => t.type.name).join(", ")
         }
-        
-        return pokemons
     }))
     
     return mapPokemons
@@ -60,10 +56,15 @@ const getInfoDB = async () => {
 
 
 const getAllPokemons = async () => {
-    const apiPokemons = await getPokemonsApi()
-    const dbPokemons = await getInfoDB()
-    const allPokemons = [...apiPokemons, ...dbPokemons]
-    return allPokemons
+    try {
+        const apiPokemons = await getPokemonsApi()
+        const dbPokemons = await getInfoDB()
+        const allPokemons = [...apiPokemons, ...dbPokemons]
+        return allPokemons
+    } catch (error) {
+        console.log(error);
+    }
+    
 }
 
 

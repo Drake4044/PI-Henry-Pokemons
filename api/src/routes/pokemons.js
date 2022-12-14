@@ -33,9 +33,9 @@ router.get("/", async (req,res) => {
         } else {
             const allpokemons = await getAllPokemons()
             
-            allpokemons.length 
+            allpokemons
             ? res.json(allpokemons)
-            : res.res.status(404).json("Pokemons not found")
+            : res.status(404).json("Pokemons not found")
         }
 
 })
