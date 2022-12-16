@@ -15,9 +15,9 @@ const createDbTypes = async () => {
 
 
 const getPokemonsApi = async () => {
-    const fisrtCall = (await axios("https://pokeapi.co/api/v2/pokemon",{ "headers": "Deflate" })).data
-    const secondCall = (await axios(fisrtCall.next)).data
-    const pokemons = [...fisrtCall.results, ...secondCall.results]
+    const fisrtCall = (await axios("https://pokeapi.co/api/v2/pokemon")).data
+    const secondCall = (await axios(fisrtCall.next)).data.results
+    const pokemons = [...fisrtCall.results, ...secondCall]
 
     const mapPokemons = await Promise.all(pokemons.map( async pokemon => {
         const pkmnInfo = (await axios(pokemon.url)).data
@@ -32,7 +32,7 @@ const getPokemonsApi = async () => {
             speed: pkmnInfo.stats[5].base_stat,
             height: pkmnInfo.height,
             weight: pkmnInfo.weight,
-            types: pkmnInfo.types.map( t => t.type.name).join(", ")
+            types: pkmnInfo.types.map( t => t.type.name).join(" - ")
         }
     }))
     

@@ -69,36 +69,40 @@ router.get("/:id", async (req,res) => {
 })
 
 router.post("/" , async (req,res) => {
-    const {
-        name,
-        image,
-        hp,
-        attack,
-        defense,
-        speed,
-        height,
-        weight,
-        types
-    } = req.body
-
-// if(!name) res.status(400).json("Name is a obligaroty")
-
-    const pokemonCreated = await Pokemon.create({
-        name,
-        image,
-        hp,
-        attack,
-        defense,
-        speed,
-        height,
-        weight,
-    })
-
-    const typesDB = await Types.findAll({
-        where: { name: types }
-    })
-    pokemonCreated.addTypes(typesDB)
-    res.json("Pokemon created")
+    try {
+        const {
+            name,
+            image,
+            hp,
+            attack,
+            defense,
+            speed,
+            height,
+            weight,
+            types
+        } = req.body
+    
+        const pokemonCreated = await Pokemon.create({
+            name,
+            image,
+            hp,
+            attack,
+            defense,
+            speed,
+            height,
+            weight,
+        })
+    
+        const typesDB = await Types.findAll({
+            where: { name: types }
+        })
+        pokemonCreated.addTypes(typesDB)
+        res.json("Pokemon created")
+    
+    } catch (error) {
+        if(!req.body.name) res.status(400).json("Name is obligaroty")
+        res.status(404).json("Pokemons not create")
+    }
 })
 
 

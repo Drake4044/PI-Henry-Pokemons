@@ -72,3 +72,15 @@ export const deletePokemon = (id) => {
         payload: id
     }
 }
+
+
+export const createPkmn = pkmn => {
+    return async () => {
+        try {
+            const Createpkmn = await axios.post("http://localhost:3001/pokemons", pkmn)
+            alert (Createpkmn.data) 
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    }        
+}

@@ -482,38 +482,80 @@ const AllPokemons = [ {
   "types": "normal, fairy"
 }]
 
-const desOrderPokemons = AllPokemons.sort((a, b) => {
-    return a.name.localeCompare(b.name)
-}) // simulate desorder db
+const desOrderPokemons = AllPokemons.sort((a, b) => a.name.localeCompare(b.name)) // simulate desorder db
 
 // desOrderPokemons.sort((a, b) => {
 //     return a.id - b.id
 // }) // with this it, order my db :)
 
-const filtro = desOrderPokemons.filter( pk => pk.types.toLowerCase().includes(("poison".toLowerCase())))
+// const filtro = desOrderPokemons.filter( pk => pk.types.toLowerCase().includes(("poison".toLowerCase())))
 
 // desOrderPokemons.sort((a, b) => {
 //   return a.types - b.types
 // })
 
+// const filtro = desOrderPokemons.sort((a, b) => {
+//   return a.name.localeCompare(b.name)
+// })
 
-console.log(filtro);
 
-const getFormatPkmn = pkmn => {
-    
+  const attack = desOrderPokemons.sort((a, b) => a.attack - b.attack).reverse()
+
+
+// console.log(attack)
+
+const filterTypes = (type, name, attack) => {
+  let allpokemons = [...desOrderPokemons]
+
+  if(type !== 'all') {
+      allpokemons = allpokemons.filter( pk => pk.types.includes(type))
+  }
+  switch (name) {
+      case "asc":
+          allpokemons = allpokemons.sort((a, b) => a.name.localeCompare(b.name))
+          break
+      case "des":
+          allpokemons = allpokemons.sort((a, b) => a.name.localeCompare(b.name)).reverse()
+          break
+      default:
+          allpokemons
+          break
+  }
+  switch(attack){
+    case "asc":
+    allpokemons = allpokemons.sort((a, b) => a.attack - b.attack).reverse()
+    break
+    case "des":
+    allpokemons = allpokemons.sort((a, b) => a.attack - b.attack)
+    break
+    default:
+    allpokemons
+    break
+  } 
+
+  console.log(allpokemons);
+}
+
+filterTypes("normal","asc","des")
+
+
+
+
+function getFormatPkmn(pkmn) {
+
   const formatPk = {
-          id: pkmn.id,
-          name: pkmn.name,
-          image: pkmn.sprites.other["official-artwork"].front_default,
-          hp: pkmn.stats[0].base_stat,
-          attack: pkmn.stats[1].base_stat,
-          defense: pkmn.stats[2].base_stat,  
-          speed: pkmn.stats[5].base_stat,
-          height: pkmn.height,
-          weight: pkmn.weight,
-          types: pkmn.types.map( t => t.type.name).join(", ")
-      }
-  
+    id: pkmn.id,
+    name: pkmn.name,
+    image: pkmn.sprites.other["official-artwork"].front_default,
+    hp: pkmn.stats[0].base_stat,
+    attack: pkmn.stats[1].base_stat,
+    defense: pkmn.stats[2].base_stat,
+    speed: pkmn.stats[5].base_stat,
+    height: pkmn.height,
+    weight: pkmn.weight,
+    types: pkmn.types.map(t => t.type.name).join(", ")
+  }
+
   return formatPk
 }
 
@@ -562,4 +604,30 @@ const getPokemonById = async id => {
 }
 
 // getPokemonById(numero)
+
+
+const getPokemonsApi = async () => {
+  const fisrtCall = (await axios.get("https://pokeapi.co/api/v2/pokemon")).data
+  const secondCall = (await axios(fisrtCall.next)).data.results
+  const pokemons = [...fisrtCall.results, ...secondCall]
+
+  const mapPokemons = await Promise.all(pokemons.map( async pokemon => {
+      const pkmnInfo = (await axios(pokemon.url)).data
+
+      return {
+          id: pkmnInfo.id,
+          name: pkmnInfo.name,
+          image: pkmnInfo.sprites.other["official-artwork"].front_default,
+          hp: pkmnInfo.stats[0].base_stat,
+          attack: pkmnInfo.stats[1].base_stat,
+          defense: pkmnInfo.stats[2].base_stat,
+          speed: pkmnInfo.stats[5].base_stat,
+          height: pkmnInfo.height,
+          weight: pkmnInfo.weight,
+          types: pkmnInfo.types.map( t => t.type.name).join(", ")
+      }
+  }))
+  
+  console.log(mapPokemons);
+}
 

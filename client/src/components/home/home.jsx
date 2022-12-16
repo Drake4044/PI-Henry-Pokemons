@@ -3,6 +3,7 @@ import "./home.css"
 import { useDispatch, useSelector } from "react-redux";
 import CardPokemon from "../cardPokemon/cardPokemon";
 import NavBar from "../navBar/navBar";
+import Loader from "../loader/loader";
 import { getAllPokemons } from "../../redux/actions";
 
 
@@ -11,57 +12,43 @@ const Home = () => {
     const pokemons = useSelector(state => state.pokemons)
     const dispatch = useDispatch()
 
-    const [ pkmns, setPkmns ] = useState({
-        pkmns: []
-    })
+    const [ pkmns, setPkmns ] = useState([])
+    const [ loading , setloading ] = useState(false)
 
     useEffect(() => {
-        if(pokemons.length === 40) {
-            setPkmns({
-                pkmns: [...pokemons]
-            })
-        }
+            setPkmns([...pokemons])
     },[pokemons])
 
-
-    const refresh = (e) => {
-        e.preventDefault()
-        dispatch(getAllPokemons())
-    }
 
     return(
         <div>
             <NavBar setPkmns={setPkmns} />
-            <button onClick={refresh} >REFRESH</button>
+            
             <h1>Pokemons</h1>
             <div className="card">
-            {/*pkmns.filterPkmns === [] ?
-            pokemons ?
-            pokemons.map( pkmn => (
+
+            {pkmns.length === 0 ?
+            <div>
+                <h1>Not Pokemons</h1>
+            </div>
+            : loading ? 
+                <Loader/>
+            : pkmns ?
+                pkmns.map( pkmn => (
                 <CardPokemon
                 id={pkmn.id}
                 key={pkmn.id}
                 image={pkmn.image}
                 name={pkmn.name}
                 types={pkmn.types}
+                />))
+                : <CardPokemon
+                id={pokemons.id}
+                key={pokemons.id}
+                image={pokemons.image}
+                name={pokemons.name}
+                types={pokemons.types}
                 />
-            )) 
-            : <CardPokemon
-            id={pokemons.id}
-            key={pokemons.id}
-            image={pokemons.image}
-            name={pokemons.name}
-            types={pokemons.types}
-            /> 
-            :*/ pkmns.pkmns?.map( pkmn => (
-                <CardPokemon
-                id={pkmn.id}
-                key={pkmn.id}
-                image={pkmn.image}
-                name={pkmn.name}
-                types={pkmn.types}
-                />
-            ))
             }
             </div>
         </div>
