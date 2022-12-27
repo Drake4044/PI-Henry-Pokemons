@@ -1,5 +1,6 @@
 import { 
-    GET_ALL_POKEMONS, 
+    GET_ALL_POKEMONS,
+    GET_ALL_TYPES,
     GET_DETAIL_POKEMON,
     GET_POKEMONS_BY_NAME,
     CLEAR_DETAIL,
@@ -20,6 +21,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 pokemons: action.payload
+            }
+        case GET_ALL_TYPES:
+            return {
+                ...state,
+                types: action.payload
             }
         case GET_DETAIL_POKEMON:
             return {

@@ -41,6 +41,7 @@ const Home = () => {
                 image={pkmn.image}
                 name={pkmn.name}
                 types={pkmn.types}
+                setPkmns={setPkmns}
                 />))
                 : <CardPokemon
                 id={pokemons.id}
@@ -48,6 +49,7 @@ const Home = () => {
                 image={pokemons.image}
                 name={pokemons.name}
                 types={pokemons.types}
+                setPkmns={setPkmns}
                 />
             }
             </div>

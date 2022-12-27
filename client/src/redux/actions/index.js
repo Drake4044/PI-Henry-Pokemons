@@ -1,6 +1,7 @@
 import axios from "axios"
 
 export const GET_ALL_POKEMONS = "GET_ALL_POKEMONS"
+export const GET_ALL_TYPES = "GET_ALL_TYPES"
 export const GET_DETAIL_POKEMON = "GET_DETAIL_POKEMON"
 export const GET_POKEMONS_BY_NAME = "GET_POKEMONS_BY_NAME"
 export const CLEAR_DETAIL = "CLEAR_DETAIL"
@@ -23,6 +24,22 @@ export const getAllPokemons = () => {
         }
     }
 }
+
+export const getAllTypes = () => {
+    return async dispatch => {
+        try {
+            const types = (await
+                axios("http://localhost:3001/types")).data
+                dispatch({
+                    type: GET_ALL_TYPES,
+                    payload: types
+                })
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    }
+}
+
 
 export const getDetailPokemon = id => {
     return async dispatch => {
@@ -77,8 +94,8 @@ export const deletePokemon = (id) => {
 export const createPkmn = pkmn => {
     return async () => {
         try {
-            const Createpkmn = await axios.post("http://localhost:3001/pokemons", pkmn)
-            alert (Createpkmn.data) 
+            const createPkmn = await axios.post("http://localhost:3001/pokemons", pkmn)
+            alert (createPkmn.data) 
         } catch (error) {
             console.log(error.response.data);
         }

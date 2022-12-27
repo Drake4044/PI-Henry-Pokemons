@@ -536,7 +536,7 @@ const filterTypes = (type, name, attack) => {
   console.log(allpokemons);
 }
 
-filterTypes("normal","asc","des")
+// filterTypes("normal","asc","des")
 
 
 
@@ -629,5 +629,35 @@ const getPokemonsApi = async () => {
   }))
   
   console.log(mapPokemons);
+}
+
+const string = "Martin"
+
+const url = "https://raw.githubusercontent.com"
+
+const regExp = /^[A-Za-z]+$/ // only caracters not numer not space
+
+const regExpUrl = /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i
+
+const regExpUrl2 = /https?:\/\/[\w\-\.]+\.\w{2,5}\/?\S*/
+
+console.log(regExp.test(string))
+
+console.log(regExpUrl.test(url))
+console.log(regExpUrl2.test(url))
+
+
+!regExp.test(string)
+? console.log("deben ser sin espacios y ser solo letras") 
+: console.log(string) 
+
+const between = (x, min, max) => {
+  return x >= min && x <= max
+}
+
+console.log(between(1,0,255))
+
+const validate = (value, property) => {
+  
 }
 
