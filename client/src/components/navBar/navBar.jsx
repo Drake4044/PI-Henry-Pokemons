@@ -4,16 +4,19 @@ import { Link } from "react-router-dom";
 import { getPokemonsByName, getAllPokemons  } from "../../redux/actions";
 
 
-const NavBar = ({ setPkmns }) => {
+const NavBar = ({ setPkmns, setCurrentPage }) => {
 
     const [ pkmnName, setPkmnName ] = useState({ name: "" })
+    // const [ pokemons, setPokemons] = useState([])
     const [ filter, setFilter ] = useState({ 
         typeFilter: "all",
         nameFilter: "default",
         attackFilter: "default",
+        dbContent: "not-db",
         filterpkmns: []
     })
 
+    
     const pokemons = useSelector(state => state.pokemons)
 
     const dispatch = useDispatch()
@@ -21,6 +24,11 @@ const NavBar = ({ setPkmns }) => {
     useEffect(() => {
         dispatch(getAllPokemons())
     },[dispatch])
+
+    // useEffect(() => {
+    //     setPokemons(([...state]))
+    // },[state])
+
 
     useEffect(() => {
         setFilter({ 
@@ -38,7 +46,7 @@ const NavBar = ({ setPkmns }) => {
         dispatch(getPokemonsByName(pkmnName.name.toLowerCase()))
     }
 
-    const filterTypes = (type, name, attack) => {
+    const filterTypes = (type, name, attack, db) => {
         let allpokemons = [...pokemons]
         if(type !== 'all') {
             allpokemons = allpokemons.filter( pk => pk.types.includes(type))
@@ -63,6 +71,16 @@ const NavBar = ({ setPkmns }) => {
             default:
             break
         }
+        switch(db){
+            case "dbContent":
+            allpokemons = allpokemons.filter(pkmn => pkmn.hasOwnProperty("dbContent"))
+            break
+            case "non-db":
+            allpokemons = allpokemons.filter(pkmn => !pkmn.hasOwnProperty("dbContent"))
+            break
+            default:
+            break
+        }
         return allpokemons
     }
 
@@ -71,7 +89,7 @@ const NavBar = ({ setPkmns }) => {
         setFilter({
             ...filter,
             typeFilter: type,
-            filterpkmns: filterTypes(type, filter.nameFilter, filter.attackFilter)
+            filterpkmns: filterTypes(type, filter.nameFilter, filter.attackFilter, filter.dbContent)
         })
         
     }
@@ -81,7 +99,7 @@ const NavBar = ({ setPkmns }) => {
         setFilter({
             ...filter,
             nameFilter: name,
-            filterpkmns: filterTypes(filter.typeFilter, name, filter.attackFilter)
+            filterpkmns: filterTypes(filter.typeFilter, name, filter.attackFilter, filter.dbContent)
         })
         
     }
@@ -91,13 +109,25 @@ const NavBar = ({ setPkmns }) => {
         setFilter({
             ...filter,
             attackFilter: attack,
-            filterpkmns: filterTypes(filter.typeFilter, filter.nameFilter, attack)
+            filterpkmns: filterTypes(filter.typeFilter, filter.nameFilter, attack, filter.dbContent)
+        })
+        
+    }
+
+    const handleFilterDb = e => {
+        const db = e.target.value
+        setFilter({
+            ...filter,
+            dbContent: db,
+            filterpkmns: filterTypes(filter.typeFilter, filter.nameFilter, filter.attack,  db)
         })
         
     }
         
     const filterButton = () => {
-        setPkmns(filter.filterpkmns)
+        const finalfilter = [...filter.filterpkmns]
+        setPkmns(finalfilter)
+        setCurrentPage(0)
     }
 
     const refresh = (e) => {
@@ -149,6 +179,16 @@ const NavBar = ({ setPkmns }) => {
                 <option value="default">default</option>
                 <option value="max">Max</option>
                 <option value="min">Min</option>
+            </select>
+            <label>Filtet by db: </label>
+            <select
+                name= "filer-db"
+                className="filterdb"
+                onChange={handleFilterDb}
+            >
+                <option value="default">default</option>
+                <option value="non-db">Not db</option>
+                <option value="dbContent">In db</option>
             </select>
             <button onClick={filterButton} >FILTER</button>
             <Link to="/create" >

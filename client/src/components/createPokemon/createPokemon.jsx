@@ -9,16 +9,22 @@ import Type from "../type/type";
 
 const CreatePokemons = () => {
 
+    const types = useSelector(state => state.types)
+    const pokemons = useSelector(state => state.pokemons)
+    // const pokemonsFromDb = pokemons.filter(pkmn => pkmn.hasOwnProperty("dbContent")).map(pkmn => pkmn.name)
+    const pokemonsMap = pokemons.map( pkmn => pkmn.name)
+    
+
     const between = (x, min, max) => {
         return x >= min && x <= max
     }
 
     const validate = (property,value,error) => {
         if (property === "name") {
-            error[property] = value === "" || !value || !/^[A-Za-z]+$/.test(value) ? "Name debe ser solo letras" : ""
+            error[property] = value === "" || !value || !/^[A-Za-z]+$/.test(value) || pokemonsMap.includes(value)  ? "Name debe UNICO, solo letras sin espacios y sin numeros" : ""
         }
         if (property === "image") {
-            error[property] = value === "" || !value || !/https?:\/\/[\w\-\.]+\.\w{2,5}\/?\S*/.test(value) ? "image debe ser un Url de una imagen" : ""
+            error[property] = value == "" || !value || !/https?:\/\/[\w\-\.]+\.\w{2,5}\/?\S*/.test(value) ? "image debe ser un Url de una imagen" : ""
         }   
         if (property === "hp") {
             error[property] = value === "" || !value || !parseInt(value) || !between(value, 0, 255) ? "Hp debe numeros y el valor entre 0 y 255" : ""
@@ -45,7 +51,7 @@ const CreatePokemons = () => {
 }
 
 
-    const types = useSelector(state => state.types)
+    
 
     const [ pkmn, setPkmn ] = useState({
         name: "",
@@ -100,7 +106,11 @@ const CreatePokemons = () => {
             weight: pkmn.weight,
             types: pkmn.types.map( type => type.name),
         }
-        dispatch(createPkmn(pokemonInput))
+        if(pkmn.error.length > 6){
+            dispatch(createPkmn(pokemonInput))
+        } else {
+            alert("tienes q completar todos los inputs")
+        }
     }
 
     return (

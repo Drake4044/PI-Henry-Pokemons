@@ -13,7 +13,7 @@ const Type = ({id, type, setPkmn, state}) => {
     return (
         <div>
             <button onClick={onclick} >X</button>
-            <h1>{type}</h1>
+            <h2>{type}</h2>
         </div>
     )
 }

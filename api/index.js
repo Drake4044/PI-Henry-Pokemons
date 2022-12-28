@@ -29,10 +29,7 @@ conn.sync(syncOptions).then(() => {
     if(syncOptions.force){
       await createDbTypes()
       // await createDbPokemons()
-      
     }
-
-
     console.log('conecting and listening at 3001'); // eslint-disable-line no-console
   });
 });

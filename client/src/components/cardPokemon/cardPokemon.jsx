@@ -4,13 +4,13 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { deletePokemon } from "../../redux/actions"
 
-const CardPokemon = ({ id, image, name, types, setPkmns }) => {
+const CardPokemon = ({ id, image, name, types, setPkmns, state }) => {
 
     const dispatch = useDispatch()
 
-    // const onclick = () => {
-    //     setPkmns(pkmns.filter( pkmn => pkmn.id !== id))
-    // }
+    const onclick = () => {
+        setPkmns(state.filter( state => state.id !== id))
+    }
 
     return (
         <div className="card-pokemon">

@@ -50,8 +50,20 @@ const getInfoDB = async () => {
             }
         },
     })
-    const pkmnFotmat = getFormatPokemons(allPokemonsdb)
-    return pkmnFotmat
+    const formatPk = allPokemonsdb.map( pkmn => ({
+        id: pkmn.id,
+        name: pkmn.name,
+        image: pkmn.image,
+        hp: pkmn.hp,
+        attack: pkmn.attack,
+        defense: pkmn.defense,
+        speed: pkmn.speed,
+        height: pkmn.height,
+        weight: pkmn.weight,
+        types: pkmn.types.map( t => t.name).join(", "),
+        dbContent: pkmn.dbContent
+    }))
+    return formatPk
 }
 
 
