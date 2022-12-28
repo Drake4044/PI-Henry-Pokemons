@@ -19,13 +19,11 @@ class DetailPokemon extends React.Component {
 
         return (
             <div>
-                <Link to="/pokemons" >
-                    <button>ATRAS</button>
-                </Link>
                 <div className="detailPokemon" >
                     <img src={this.props.pkmnDetail.image} alt={this.props.pkmnDetail.name}  />
                     <h2>POKEMON Nro: {this.props.pkmnDetail.id}</h2>
                     <h1>Name: {this.props.pkmnDetail.name}</h1>
+                    <h3>Types: {this.props.pkmnDetail.types}</h3>
                     <p>Life: {this.props.pkmnDetail.hp}</p>
                     <p>Attack: {this.props.pkmnDetail.attack}</p>
                     <p>Defense: {this.props.pkmnDetail.defense}</p>

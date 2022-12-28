@@ -191,9 +191,6 @@ const NavBar = ({ setPkmns, setCurrentPage }) => {
                 <option value="dbContent">In db</option>
             </select>
             <button onClick={filterButton} >FILTER</button>
-            <Link to="/create" >
-                <button>CREATE POKEMON</button>
-            </Link>
         </div>
     )
 }

@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import CardPokemon from "../cardPokemon/cardPokemon";
 import NavBar from "../navBar/navBar";
 import Loader from "../loader/loader";
-import { getAllPokemons } from "../../redux/actions";
 
 const POKEMON_PER_PAGE = 12
 const INITIAL_PAGE = 0
@@ -13,7 +12,6 @@ const INITIAL_PAGE = 0
 const Home = () => {
 
     const pokemons = useSelector(state => state.pokemons)
-    const dispatch = useDispatch()
 
     const [ pkmns, setPkmns ] = useState([])
     const [ itemns, setItemns ] = useState([])
@@ -106,6 +104,13 @@ const Home = () => {
                 />
             }
             </div>
+            
+            <button onClick={prevHandler} >Prev</button>
+            <button onClick={changePageHandler} value={0} >1</button>
+            {pkmns.length > 11 && <button onClick={changePageHandler} value={1} >2</button>}
+            {pkmns.length > 23 && <button onClick={changePageHandler} value={2} >3</button>}
+            {pkmns.length > 35 && <button onClick={changePageHandler} value={3} >4</button>}
+            <button onClick={nextHandler} >Next</button>
         </div>
     )
 }

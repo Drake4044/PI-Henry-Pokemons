@@ -11,7 +11,6 @@ const CreatePokemons = () => {
 
     const types = useSelector(state => state.types)
     const pokemons = useSelector(state => state.pokemons)
-    // const pokemonsFromDb = pokemons.filter(pkmn => pkmn.hasOwnProperty("dbContent")).map(pkmn => pkmn.name)
     const pokemonsMap = pokemons.map( pkmn => pkmn.name)
     
 
@@ -21,31 +20,31 @@ const CreatePokemons = () => {
 
     const validate = (property,value,error) => {
         if (property === "name") {
-            error[property] = value === "" || !value || !/^[A-Za-z]+$/.test(value) || pokemonsMap.includes(value)  ? "Name debe UNICO, solo letras sin espacios y sin numeros" : ""
+            value === "" || !value || !/^[A-Za-z]+$/.test(value) || pokemonsMap.includes(value)  ?  error[property] = "Name debe UNICO, solo letras sin espacios y sin numeros" : error = {}
         }
         if (property === "image") {
-            error[property] = value == "" || !value || !/https?:\/\/[\w\-\.]+\.\w{2,5}\/?\S*/.test(value) ? "image debe ser un Url de una imagen" : ""
+            value == "" || !value || !/https?:\/\/[\w\-\.]+\.\w{2,5}\/?\S*/.test(value) ? error[property] = "image debe ser un Url de una imagen" : error = {}
         }   
         if (property === "hp") {
-            error[property] = value === "" || !value || !parseInt(value) || !between(value, 0, 255) ? "Hp debe numeros y el valor entre 0 y 255" : ""
+            value === "" || !value || !parseInt(value) || !between(value, 0, 255) ? error[property] = "Hp debe numeros y el valor entre 0 y 255" : error = {}
         }
         if (property === "attack") {
-            error[property] = value === "" || !value || !parseInt(value) || !between(value, 0, 255) ? "Attack debe numeros numeros y el valor entre 0 y 255" : ""
+            value === "" || !value || !parseInt(value) || !between(value, 0, 255) ? error[property] = "Attack debe ser un valor entre 0 y 255" : error = {}
         }
         if (property === "defense") {
-            error[property] = value === "" || !value || !parseInt(value) || !between(value, 0, 255) ? "Defense debe numeros numeros y el valor entre 0 y 255" : ""
+            value === "" || !value || !parseInt(value) || !between(value, 0, 255) ? error[property] = "Defense debe ser un valor entre 0 y 255" : error = {}
         }
         if (property === "speed") {
-            error[property] = value === "" || !value || !parseInt(value) || !between(value, 0, 255) ? "Speed debe numeros numeros y el valor entre 0 y 255" : ""
+            value === "" || !value || !parseInt(value) || !between(value, 0, 255) ? error[property] = "Speed debe ser un valor entre 0 y 255" : error = {} 
         }
         if (property === "height") {
-            error[property] = value === "" || !value || !parseInt(value) || !between(value, 0, 255) ? "Height debe numeros numeros y el valor entre 0 y 255" : ""
+            value === "" || !value || !parseInt(value) || !between(value, 0, 255) ? error[property] = "Height debe ser un valor entre 0 y 255" : error = {}
         }
         if (property === "weight") {
-            error[property] = value === "" || !value || !parseInt(value) || !between(value, 0, 255) ? "Weight debe numeros numeros y el valor entre 0 y 255" : ""
+            value === "" || !value || !parseInt(value) || !between(value, 0, 255) ? error[property] = "Weight debe ser un valor entre 0 y 255" : error = {}
         }
         if (property === "types") {
-            error[property] = pkmn[property].length === 0 || pkmn[property].length >= 2 || pkmn[property] === []|| !pkmn[property] ? "Types debe ser como min 1 y max 2 types" : ""
+            pkmn[property].length > 1 || !pkmn[property] ? error[property] = "Types debe ser como min 1 y max 2 types" : error = {}
         }
     return error
 }
@@ -95,30 +94,26 @@ const CreatePokemons = () => {
 
     const onSubmit = e => {
         e.preventDefault()
-        const pokemonInput = {
-            name: pkmn.name,
-            image: pkmn.image,
-            hp: pkmn.hp,
-            attack: pkmn.attack,
-            defense: pkmn.defense,
-            speed: pkmn.speed,
-            height: pkmn.height ,
-            weight: pkmn.weight,
-            types: pkmn.types.map( type => type.name),
-        }
-        if(pkmn.error.length > 6){
+        if(Object.keys(pkmn.error).length === 0){
+            const imagenUrl = "https://marriland.com/wp-content/plugins/marriland-core/images/pokemon/sprites/home/full/unown-n.png"
+
+            const pokemonInput = {
+                name: pkmn.name,
+                image: pkmn.image === "" ? imagenUrl : pkmn.image,
+                hp: pkmn.hp,
+                attack: pkmn.attack,
+                defense: pkmn.defense,
+                speed: pkmn.speed,
+                height: pkmn.height ,
+                weight: pkmn.weight,
+                types: pkmn.types.map( type => type.name).join(" - ")}
             dispatch(createPkmn(pokemonInput))
-        } else {
-            alert("tienes q completar todos los inputs")
-        }
+        } else alert("Completatodos los campos sin errores")
     }
 
     return (
         <div>
             <h2>Create Your Pokemon!!!</h2>
-            <Link to="/pokemons" >
-                    <button>ATRAS</button>
-                </Link>
             <form onSubmit={onSubmit} >
                 <label>Name: </label>
                 <input type="text" name="name" value={pkmn.name} onChange={changeHandler} onBlur={e => console.log(e.target.value)}/>
@@ -127,22 +122,22 @@ const CreatePokemons = () => {
                 <input type="text" name="image" value={pkmn.image} onChange={changeHandler} />
                 {pkmn.error.image && <p>{pkmn.error.image}</p>}
                 <label>Hp: </label>
-                <input type="text" name="hp" value={pkmn.hp} onChange={changeHandler} />
+                <input type="number" name="hp" value={pkmn.hp} onChange={changeHandler} />
                 {pkmn.error.hp && <p>{pkmn.error.hp}</p>}
                 <label>Attack: </label>
-                <input type="text" name="attack" value={pkmn.attack} onChange={changeHandler} />
+                <input type="number" name="attack" value={pkmn.attack} onChange={changeHandler} />
                 {pkmn.error.attack && <p>{pkmn.error.attack}</p>}
                 <label>Defense: </label>
-                <input type="text" name="defense" value={pkmn.defense} onChange={changeHandler} />
+                <input type="number" name="defense" value={pkmn.defense} onChange={changeHandler} />
                 {pkmn.error.defense && <p>{pkmn.error.defense}</p>}
                 <label>Speed: </label>
-                <input type="text" name="speed" value={pkmn.speed} onChange={changeHandler} />
+                <input type="number" name="speed" value={pkmn.speed} onChange={changeHandler} />
                 {pkmn.error.speed && <p>{pkmn.error.speed}</p>}
                 <label>Height: </label>
-                <input type="text" name="height" value={pkmn.height} onChange={changeHandler} />
+                <input type="number" name="height" value={pkmn.height} onChange={changeHandler} />
                 {pkmn.error.height && <p>{pkmn.error.height}</p>}
                 <label>Weight: </label>
-                <input type="text" name="weight" value={pkmn.weight} onChange={changeHandler} />
+                <input type="number" name="weight" value={pkmn.weight} onChange={changeHandler} />
                 {pkmn.error.weight && <p>{pkmn.error.weight}</p>}
                 <label>Type/s: </label>
                 <select name="types" value={pkmn.types} onChange={typesHandler} >
