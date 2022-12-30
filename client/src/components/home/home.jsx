@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./home.css"
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import CardPokemon from "../cardPokemon/cardPokemon";
 import NavBar from "../navBar/navBar";
-import Loader from "../loader/loader";
+import Landing from "../landing/landing"
+
 
 const POKEMON_PER_PAGE = 12
 const INITIAL_PAGE = 0
@@ -16,7 +17,7 @@ const Home = () => {
     const [ pkmns, setPkmns ] = useState([])
     const [ itemns, setItemns ] = useState([])
     const [ currentPage, setCurrentPage ] = useState(0)
-    const [ loading , setloading ] = useState(false)
+    
 
     useEffect(() => {
             setPkmns([...pokemons])
@@ -58,30 +59,41 @@ const Home = () => {
         const Index = Page * POKEMON_PER_PAGE
 
         setItemns([...pkmns].splice(Index,POKEMON_PER_PAGE))
-    
         setCurrentPage(Page)
     }
 
 
+
     return(
-        <div>
+        <div className="pokebody">
+            <Landing/>
             <NavBar setPkmns={setPkmns} state={pkmns} setCurrentPage={setCurrentPage}/>
             
             <h1>Pokemons</h1>
-            <button onClick={prevHandler} >Prev</button>
-            <button onClick={changePageHandler} value={0} >1</button>
-            {pkmns.length > 11 && <button onClick={changePageHandler} value={1} >2</button>}
-            {pkmns.length > 23 && <button onClick={changePageHandler} value={2} >3</button>}
-            {pkmns.length > 35 && <button onClick={changePageHandler} value={3} >4</button>}
-            <button onClick={nextHandler} >Next</button>
+            <div className="pagination" >
+                <div className="pageButtons">
+                    <button onClick={prevHandler} >Prev</button>
+                    <button  onClick={changePageHandler} value={0} >1</button>
+                    {pkmns.length > 12 && <button onClick={changePageHandler} value={1} >2</button>}
+                    {pkmns.length > 24 && <button onClick={changePageHandler} value={2} >3</button>}
+                    {pkmns.length > 36 && <button onClick={changePageHandler} value={3} >4</button>}
+                    {pkmns.length > 48 && <button onClick={changePageHandler} value={4} >5</button>}
+                    {pkmns.length > 60 && <button onClick={changePageHandler} value={5} >6</button>}
+                    {pkmns.length > 72 && <button onClick={changePageHandler} value={6} >7</button>}
+                    <button onClick={nextHandler} >Next</button>
+                </div>
+                <div className="page">
+                    <h2>Page: {currentPage + 1}</h2>
+                </div>
+                <h2>{pkmns.length} Pokemons found!!</h2>
+            </div>
+            
             <div className="card">
 
             {itemns.length === 0 ?
             <div>
                 <h1>Not Pokemons</h1>
             </div>
-            : loading ? 
-                <Loader/>
             : itemns ?
             itemns.map( pkmn => (
                 <CardPokemon
@@ -110,6 +122,9 @@ const Home = () => {
             {pkmns.length > 11 && <button onClick={changePageHandler} value={1} >2</button>}
             {pkmns.length > 23 && <button onClick={changePageHandler} value={2} >3</button>}
             {pkmns.length > 35 && <button onClick={changePageHandler} value={3} >4</button>}
+            {pkmns.length > 48 && <button onClick={changePageHandler} value={4} >5</button>}
+            {pkmns.length > 60 && <button onClick={changePageHandler} value={5} >6</button>}
+            {pkmns.length > 72 && <button onClick={changePageHandler} value={6} >7</button>}
             <button onClick={nextHandler} >Next</button>
         </div>
     )

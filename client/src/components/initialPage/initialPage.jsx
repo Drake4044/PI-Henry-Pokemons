@@ -1,6 +1,8 @@
 import React from "react";
+import "./initialPage.css"
 import ImagePage from "../../images/wallpaper.jpg"
 import Boton from "../../images/pokeball.png"
+import GottaCatchALL from "../../images/gotta-catch-all.png"
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -16,12 +18,22 @@ const InitialPage = () => {
     })
 
 
-    return(
+    return(  
         <div>
-            <img src={ImagePage} alt="Main page" />
-            <Link to="/pokemons" >
+            <div className="mainpage">
+                <img src={ImagePage} alt="Main page" />
+            </div>
+            <div className="pokeball">
                 <img src={Boton} alt="Pokeball" />
-            </Link>
+                <Link to="/pokemons" >
+                    <div className="circle">
+                        <div className="light"></div>
+                    </div>
+                </Link>
+            </div>
+            <div className="gottacatch" >
+                <img src={GottaCatchALL} alt="Gotta catch all" />
+            </div>
         </div>
     )
 }

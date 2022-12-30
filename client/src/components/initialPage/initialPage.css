@@ -1,0 +1,35 @@
+.mainpage img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.pokeball img  {
+    position: absolute;
+    top: 300px; left: 500px;
+    width: 450px;
+    height: 450px;
+}
+
+.gottacatch img {
+    position: absolute;
+    top: 750px; left: 300px;
+    width: 900px;
+    height: 150px;
+}
+
+.circle {
+    position: relative;
+    bottom: 423px; left: 681px;
+    width: 75px;  
+}
+
+.light {
+    width: 100%; 
+    padding-bottom: 100%;
+    border-radius: 50%;
+    border: 7px solid #7c8690;
+    background: #ececec; 
+    box-shadow: 0 0 3px gray;
+    transition: 0.5s;
+}

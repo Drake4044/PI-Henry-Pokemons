@@ -1,4 +1,33 @@
-.home div{
-    display: inline-grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+.pokebody {
+    background-image: url(../../images/fondoweb.jpg);
+    background-position: center center;
+    background-size: cover;
 }
+
+.pagination {
+    display: flex;
+    justify-items: center;
+    justify-content: space-between;
+    border: solid 2px black;
+}
+
+.pageButtons {
+    display: flex;
+    border: solid 5px rgb(230, 230, 0);
+    background-color: rgb(255, 0, 0);
+    justify-content: center;
+    position: relative;
+    left: 575px; top: 1px;
+    height: 60px;
+}
+
+.pageButtons button {
+    margin: 15px;
+}
+
+.page {
+    display: flex;
+    position: relative;
+    left: 300px;
+}
+

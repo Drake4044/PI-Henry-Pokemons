@@ -1,15 +1,17 @@
 import React from "react";
+import "./landing.css";
+import Logo from "../../images/pokemon-logo.png"
 import { Link } from "react-router-dom";
 
 
 const Landing = () => {
     
     return(
-        <div>
+        <div className="landing">
             <Link to="/pokemons" >
-                <h1>GO POKEMONS</h1>
+                <img src={Logo} alt="Logo Pokemon" />
             </Link>
-    
+        
             <h1>Welcome to Pokedex</h1>
 
             <Link to="/create" >

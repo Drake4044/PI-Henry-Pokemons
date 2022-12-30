@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
+import "./navBar.css"
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { getPokemonsByName, getAllPokemons  } from "../../redux/actions";
 
 
 const NavBar = ({ setPkmns, setCurrentPage }) => {
 
     const [ pkmnName, setPkmnName ] = useState({ name: "" })
-    // const [ pokemons, setPokemons] = useState([])
     const [ filter, setFilter ] = useState({ 
         typeFilter: "all",
         nameFilter: "default",
@@ -20,15 +19,6 @@ const NavBar = ({ setPkmns, setCurrentPage }) => {
     const pokemons = useSelector(state => state.pokemons)
 
     const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(getAllPokemons())
-    },[dispatch])
-
-    // useEffect(() => {
-    //     setPokemons(([...state]))
-    // },[state])
-
 
     useEffect(() => {
         setFilter({ 
@@ -138,59 +128,65 @@ const NavBar = ({ setPkmns, setCurrentPage }) => {
 
 
     return(
-        <div>
-            <input type="text" name="name" placeholder="Search Pokemon..." value={pkmnName.name} onChange={handleChange} />
-            <button onClick={search} >BUSCAR</button>
-            <button onClick={refresh} >REFRESH</button>
-            <label>Type: </label>
-            <select
-                name="fiter-types"
-                className="filterTypes"
-                onChange={handleFilterTypes}
-            >
-                <option value="all">All Types</option>
-                <option value="normal">Normal</option>
-                <option value="fire">Fire</option>
-                <option value="water">Water</option>
-                <option value="grass">Grass</option>
-                <option value="poison">Poison</option>
-                <option value="bug">Bug</option>
-                <option value="flying">Flying</option>
-                <option value="electric">Electric</option>
-                <option value="ground">Ground</option>
-                <option value="fairy">Fairy</option>
-            </select>
-            <label>ABC: </label>
-            <select
-                name= "filer-name"
-                className="filterNames"
-                onChange={handleFilterNames}
-            >
-                <option value="default">default</option>
-                <option value="asc">Asc.</option>
-                <option value="des">Des.</option>
-            </select>
-            <label>Attack: </label>
-            <select
-                name= "filer-attack"
-                className="filterAttack"
-                onChange={handleFilterAttack}
-            >
-                <option value="default">default</option>
-                <option value="max">Max</option>
-                <option value="min">Min</option>
-            </select>
-            <label>Filtet by db: </label>
-            <select
-                name= "filer-db"
-                className="filterdb"
-                onChange={handleFilterDb}
-            >
-                <option value="default">default</option>
-                <option value="non-db">Not db</option>
-                <option value="dbContent">In db</option>
-            </select>
-            <button onClick={filterButton} >FILTER</button>
+        <div className="navbar">
+            <div className="searchbar">
+                <input type="search" name="name" placeholder="Search Pokemon..." value={pkmnName.name} onChange={handleChange} />
+                <button onClick={search} >BUSCAR</button>
+            </div>
+            <div className="refresh" >
+                <div className="light" onClick={refresh}></div>
+            </div>
+            <div className="filter">
+                <label>Type: </label>
+                <select
+                    name="fiter-types"
+                    className="filterTypes"
+                    onChange={handleFilterTypes}
+                >
+                    <option value="all">All Types</option>
+                    <option value="normal">Normal</option>
+                    <option value="fire">Fire</option>
+                    <option value="water">Water</option>
+                    <option value="grass">Grass</option>
+                    <option value="poison">Poison</option>
+                    <option value="bug">Bug</option>
+                    <option value="flying">Flying</option>
+                    <option value="electric">Electric</option>
+                    <option value="ground">Ground</option>
+                    <option value="fairy">Fairy</option>
+                </select>
+                <label>ABC: </label>
+                <select
+                    name= "filer-name"
+                    className="filterNames"
+                    onChange={handleFilterNames}
+                >
+                    <option value="default">default</option>
+                    <option value="asc">Asc.</option>
+                    <option value="des">Des.</option>
+                </select>
+                <label>Attack: </label>
+                <select
+                    name= "filer-attack"
+                    className="filterAttack"
+                    onChange={handleFilterAttack}
+                >
+                    <option value="default">default</option>
+                    <option value="max">Max</option>
+                    <option value="min">Min</option>
+                </select>
+                <label>Filtet by db: </label>
+                <select
+                    name= "filer-db"
+                    className="filterdb"
+                    onChange={handleFilterDb}
+                >
+                    <option value="default">default</option>
+                    <option value="non-db">Not db</option>
+                    <option value="dbContent">In db</option>
+                </select>
+                <button onClick={filterButton} >FILTER</button>
+            </div>
         </div>
     )
 }

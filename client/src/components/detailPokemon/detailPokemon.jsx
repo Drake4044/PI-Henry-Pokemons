@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { clearDetail, getDetailPokemon } from "../../redux/actions";
+import Landing from "../landing/landing"
 
 
 class DetailPokemon extends React.Component {
@@ -19,6 +20,7 @@ class DetailPokemon extends React.Component {
 
         return (
             <div>
+                <Landing/>
                 <div className="detailPokemon" >
                     <img src={this.props.pkmnDetail.image} alt={this.props.pkmnDetail.name}  />
                     <h2>POKEMON Nro: {this.props.pkmnDetail.id}</h2>

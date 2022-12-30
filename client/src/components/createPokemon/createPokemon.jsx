@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createPkmn, getAllTypes } from "../../redux/actions";
 import Type from "../type/type";
+import Landing from "../landing/landing"
 
 
 
@@ -106,13 +107,14 @@ const CreatePokemons = () => {
                 speed: pkmn.speed,
                 height: pkmn.height ,
                 weight: pkmn.weight,
-                types: pkmn.types.map( type => type.name).join(" - ")}
+                types: pkmn.types.map( type => type.name)}
             dispatch(createPkmn(pokemonInput))
         } else alert("Completatodos los campos sin errores")
     }
 
     return (
         <div>
+            <Landing/>
             <h2>Create Your Pokemon!!!</h2>
             <form onSubmit={onSubmit} >
                 <label>Name: </label>

@@ -1,0 +1,11 @@
+.landing {
+    display: flex;
+    justify-content: space-around;
+    background-color: red;
+    border-bottom: solid black 5px;
+}
+
+.landing img {
+    height: 100px;
+    width: 300px;
+}
