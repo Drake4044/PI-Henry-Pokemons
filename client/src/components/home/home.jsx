@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./home.css"
 import { useSelector } from "react-redux";
+import notFound from "../../images/notfound.png"
 import CardPokemon from "../cardPokemon/cardPokemon";
 import NavBar from "../navBar/navBar";
-import Landing from "../landing/landing"
-import Message from "../message/message"
+import Landing from "../landing/landing";
+import Message from "../message/message";
 
 
 const POKEMON_PER_PAGE = 12
@@ -88,14 +89,15 @@ const Home = () => {
                 <div className="page">
                     <h2>Page: {currentPage + 1}</h2>
                 </div>
-                <h2>{pkmns.length} Pokemons found!!</h2>
+                <div className="found">
+                    <h2>{pkmns.length} Pokemons found!!</h2>
+                </div>
             </div>
             
             <div className="card">
 
             {itemns.length === 0 ?
-            <div>
-                <h1>Not Pokemons</h1>
+            <div className="notFound">
             </div>
             : itemns ?
             itemns.map( pkmn => (
@@ -118,8 +120,9 @@ const Home = () => {
                 state={pkmns}
                 />
             }
+
             </div>
-            
+            <div className="pageButtons">
             <button onClick={prevHandler} >Prev</button>
             <button onClick={changePageHandler} value={0} >1</button>
             {pkmns.length > 11 && <button onClick={changePageHandler} value={1} >2</button>}
@@ -129,6 +132,7 @@ const Home = () => {
             {pkmns.length > 60 && <button onClick={changePageHandler} value={5} >6</button>}
             {pkmns.length > 72 && <button onClick={changePageHandler} value={6} >7</button>}
             <button onClick={nextHandler} >Next</button>
+            </div>
         </div>
     )
 }

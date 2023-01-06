@@ -11,12 +11,16 @@ const Landing = () => {
             <Link to="/pokemons" >
                 <img src={Logo} alt="Logo Pokemon" />
             </Link>
-        
-            <h1>Welcome to Pokedex</h1>
 
-            <Link to="/create" >
-                <h1>CREATE POKEMON</h1>
-            </Link>
+            <div className="mainTitle">
+                <h1>Welcome to Pokedex</h1>
+            </div>
+            
+            <div className="buttonCreate">
+                <Link to="/create" >
+                    <button className="btnCreate">CREATE POKEMON</button>
+                </Link> 
+            </div>
         </div>
     )
 }

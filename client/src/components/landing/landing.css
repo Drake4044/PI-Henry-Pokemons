@@ -13,3 +13,19 @@
     height: 100px;
     width: 300px;
 }
+
+.buttonCreate {
+    position: relative;
+    right: 30px;
+    top: 20px;
+}
+
+.btnCreate {
+    height: 60px;
+    width: 150px;
+}
+
+.mainTitle {
+    position: relative;
+    right: 60px;
+}

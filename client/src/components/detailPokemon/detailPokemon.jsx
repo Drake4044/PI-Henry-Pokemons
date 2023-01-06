@@ -20,7 +20,7 @@ class DetailPokemon extends React.Component {
     render() {
 
         return (
-            <div>
+            <div className="backgroundD">
                 <Landing/>
                 <div className="detailPokemon" >
                     <div className="img">

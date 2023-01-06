@@ -1,3 +1,10 @@
+.background {
+    background-image: url("../../images/grassFondo.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    padding-bottom: 30px;
+}
+
 .form input {
     border: solid 5px red;
     background-color: #57e3ff;
@@ -70,5 +77,15 @@
     border: none;
     font-size: 18px;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-    /* outline: none; */
+}
+
+.title {
+    position: relative;
+    left: 620px;
+    margin: 5px;
+    background-color: #fcff57;
+    border: solid 5px black;
+    border-radius: 10px;
+    height: 70px;
+    width: 300px;
 }

@@ -116,9 +116,11 @@ const CreatePokemons = () => {
     }
 
     return (
-        <div>
+        <div className="background">
             <Landing/>
-            <h2>Create Your Pokemon!!!</h2>
+            <div className="title">
+                <h2>Create Your Pokemon!!!</h2>
+            </div>
             <div className="container" >
             <form className="form" onSubmit={onSubmit} >
                 <div className="box">
