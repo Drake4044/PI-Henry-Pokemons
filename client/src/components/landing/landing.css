@@ -2,7 +2,11 @@
     display: flex;
     justify-content: space-around;
     background-color: red;
-    border-bottom: solid black 5px;
+    border-top-right-radius: 20%;
+    border-top-left-radius: 20%;
+    border: solid black 5px;
+    border-left: none;
+    border-right: none;
 }
 
 .landing img {

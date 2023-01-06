@@ -5,13 +5,15 @@ import {
     GET_POKEMONS_BY_NAME,
     CLEAR_DETAIL,
     GET_POKEMONS_BY_TYPE,
-    DELETE_POKEMON 
+    DELETE_POKEMON,
+    ERROR_MESSAGE
 } from "../actions"
 
 const initialState = {
     pokemons: [],
     types: [],
-    pokemonDetail: {}
+    pokemonDetail: {},
+    error: ""
 }
 
 
@@ -20,7 +22,8 @@ const rootReducer = (state = initialState, action) => {
         case GET_ALL_POKEMONS:
             return {
                 ...state,
-                pokemons: action.payload
+                pokemons: action.payload,
+                error: action.error
             }
         case GET_ALL_TYPES:
             return {
@@ -47,11 +50,15 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 pokemons: action.payload
             }
-
         case DELETE_POKEMON:
             return {
                 ...state,
                 pokemons: state.pokemons.filter( pkmn => pkmn.id !== action.payload)
+            }
+        case ERROR_MESSAGE:
+            return {
+                ...state,
+                error: action.error
             }
 
         default: return {...state}

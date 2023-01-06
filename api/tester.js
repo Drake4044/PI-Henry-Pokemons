@@ -655,9 +655,19 @@ const between = (x, min, max) => {
   return x >= min && x <= max
 }
 
-console.log(between(1,0,255))
-
-const validate = (value, property) => {
-  
+// console.log(between(1,0,255))
+const find_max = (nums) => {
+let max_num = Number.NEGATIVE_INFINITY
+for (let num of nums) {
+  if(num > max_num){
+    max_num = num
+  }
+  console.log(max_num);
+}
 }
 
+find_max([1,6,9,1,7,5,1,31,2,5])
+
+let max_num = Number.NEGATIVE_INFINITY
+
+console.log(max_num);

@@ -1,0 +1,49 @@
+.detailPokemon {
+    display: flex;
+    margin: 20px;
+    border: solid 10px red;
+    border-radius: 10px;
+    background-color: rgb(0, 171, 171);
+}
+
+.img {
+    background-image: url("../../images/fondoDetail.png");
+    border: solid 3px black;
+    background-size: cover;
+    height: 500px;
+    width: 600px;
+    border-radius: 20px;
+}
+
+.pokemon { 
+    color: white;
+    background-color: rgb(5, 83, 228);
+    border: solid 5px rgb(0, 0, 0);
+    border-radius: 10px;
+    padding: 2px;
+    position: relative;
+    top: 140px;
+    height: 200px;
+    margin: 10px;
+}
+
+.data1 {
+    position: relative;
+    top: 150px;
+    padding: 10px;
+    width: 250px;
+}
+
+.data2 {
+    position: relative;
+    top: 150px;
+    padding: 10px;
+    width: 250px;
+}
+
+
+p {
+    background-color: crimson;
+    height: 30px;
+    border-radius: 10px;
+}

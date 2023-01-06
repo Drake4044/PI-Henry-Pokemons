@@ -1,0 +1,180 @@
+.normal {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(224, 239, 239);
+}
+.delete {
+    background-color: red;
+    color: white;
+    position: relative;
+    top: 20px;
+    height: 30px;
+    width: 30px;
+    border-radius: 30px;
+}
+.fighting {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(114, 133, 162);
+}
+.bug {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(0, 251, 67);
+}
+.flying {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(144, 237, 241);
+}
+.poison {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(162, 0, 255);
+}
+.ghost {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(69, 0, 133);
+}
+.ground {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(93, 45, 0);
+}
+.rock {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(83, 81, 81);
+}
+.steel {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(174, 185, 185);
+}
+.water {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(45, 238, 238);
+}
+.grass {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(0, 157, 37);
+}
+.fire {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(255, 38, 0);
+}
+.electric {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(255, 238, 0);
+}
+.psychic {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(255, 2, 255);
+}
+.ice {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(80, 183, 183);
+}
+.dark {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(71, 43, 71);
+}
+.dragon {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(255, 149, 0); 
+}
+.fairy {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(255, 0, 179);
+}
+.unknown {
+    display: flex;
+    justify-content: space-evenly   ;
+    border: solid 2px black;
+    border-radius: 10px;
+    height: 60px;
+    width: 180px;
+    background-color: rgb(255, 255, 255);
+}

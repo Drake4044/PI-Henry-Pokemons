@@ -1,4 +1,5 @@
-import React from "react";  
+import React from "react"; 
+import "./type.css" 
 
 
 const Type = ({id, type, setPkmn, state}) => {
@@ -11,9 +12,9 @@ const Type = ({id, type, setPkmn, state}) => {
     }
 
     return (
-        <div>
-            <button onClick={onclick} >X</button>
+        <div className={type}>
             <h2>{type}</h2>
+            {id && <button onClick={onclick} className="delete">X</button>}
         </div>
     )
 }

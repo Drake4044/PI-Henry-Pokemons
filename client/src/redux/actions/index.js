@@ -7,6 +7,7 @@ export const GET_POKEMONS_BY_NAME = "GET_POKEMONS_BY_NAME"
 export const CLEAR_DETAIL = "CLEAR_DETAIL"
 export const GET_POKEMONS_BY_TYPE = "GET_POKEMONS_BY_TYPE"
 export const DELETE_POKEMON = "DELETE_POKEMON"
+export const ERROR_MESSAGE = "ERROR_MESSAGE"
 
 
 export const getAllPokemons = () => {
@@ -16,11 +17,17 @@ export const getAllPokemons = () => {
                 axios("http://localhost:3001/pokemons")).data
                 dispatch({
                     type: GET_ALL_POKEMONS,
-                    payload: pokemons
+                    payload: pokemons,
+                    error : "Pokemons Gotcha"
                 })
                 console.log("Pokemons Gotcha");
         } catch (error) {
-            console.log(error.response.data);
+            console.log(error.response.data)
+            const err = error.response.data
+            dispatch({
+                type: ERROR_MESSAGE,
+                error: err
+            })
         }
     }
 }
@@ -35,7 +42,7 @@ export const getAllTypes = () => {
                     payload: types
                 })
         } catch (error) {
-            console.log(error.response.data);
+            console.log(error.response.data)
         }
     }
 }
@@ -62,7 +69,7 @@ export const getPokemonsByName = name => {
                 payload: pkmnsByName
             })
         } catch (error) {
-            console.log(error.response.data);
+            console.log(error.response.data)
         }
     }
 }

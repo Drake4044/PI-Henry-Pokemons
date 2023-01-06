@@ -1,8 +1,9 @@
-.card {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 10px;
+.card-pokemon {
+    padding: 20px;
+    margin: 10px;
+    border: solid 5px black;
+    border-radius: 10px ;
+    background-color: rgb(35, 137, 162);
 }
 
 .card img{

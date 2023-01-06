@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import CardPokemon from "../cardPokemon/cardPokemon";
 import NavBar from "../navBar/navBar";
 import Landing from "../landing/landing"
+import Message from "../message/message"
 
 
 const POKEMON_PER_PAGE = 12
@@ -17,6 +18,7 @@ const Home = () => {
     const [ pkmns, setPkmns ] = useState([])
     const [ itemns, setItemns ] = useState([])
     const [ currentPage, setCurrentPage ] = useState(0)
+    const [ message, setMessage ] = useState("")
     
 
     useEffect(() => {
@@ -68,8 +70,9 @@ const Home = () => {
         <div className="pokebody">
             <Landing/>
             <NavBar setPkmns={setPkmns} state={pkmns} setCurrentPage={setCurrentPage}/>
-            
-            <h1>Pokemons</h1>
+            <div className="bottom-pokeball">
+                <h1>Pokemons</h1>
+            </div>
             <div className="pagination" >
                 <div className="pageButtons">
                     <button onClick={prevHandler} >Prev</button>

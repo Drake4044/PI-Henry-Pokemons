@@ -2,8 +2,16 @@
     display: flex;
     justify-content: space-between;
     padding: 5px;
+    background-color: aliceblue;
+}
+.bottom-pokeball {
+    background-color: rgb(255, 0, 0);;
     border: solid black 5px;
-    border-top: none;
+    border-bottom-right-radius: 20%;
+    border-bottom-left-radius: 20%;
+    border-left: none;
+    border-right: none;
+    margin-top: 0;
 }
 
 .searchbar {

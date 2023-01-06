@@ -1,7 +1,7 @@
 .pokebody {
-    background-image: url(../../images/fondoweb.jpg);
-    background-position: center center;
+    background-image: url("../../images/fondoweb.jpg");
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .pagination {
@@ -30,4 +30,13 @@
     position: relative;
     left: 300px;
 }
+
+.card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+    border: solid 5px black;
+}
+
 
